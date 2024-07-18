@@ -1,0 +1,68 @@
+import pandas as pd
+
+
+def add_new_customer():
+    data = pd.read_csv(r'C:\Users\LENOVO\Desktop\Book1.csv')
+    print(data)
+    name = input("Enter Customer's Name : ")
+    order_id = input("Enter Customer's ID : ")
+    order_name = input("Enter Wht Customer ordered : ")
+    order_data = input("Date on which customer ordered : ")
+    city = input("Enter the customer's city name : ")
+
+    new_data = [name, order_id, order_name, order_data, city]
+    data.loc[len(data.index)] = new_data
+
+    data = pd.DataFrame(data)
+    data.to_csv(r'C:\Users\LENOVO\Desktop\Book1.csv', index=False)
+
+
+def delete_any_customer():
+    data = pd.read_csv(r'C:\Users\LENOVO\Desktop\Book1.csv')
+    print(data)
+    order_id = input("Enter OrderID of customer : ")
+
+    ind = data.index[data['Order ID'] == order_id].tolist()
+    data.drop(ind, inplace=True)
+    print(data)
+    data.to_csv(r'C:\Users\LENOVO\Desktop\Book1.csv', index=False)
+
+
+def find_any_customer():
+    data = pd.read_csv(r'C:\Users\LENOVO\Desktop\Book1.csv')
+    print(data)
+
+    order_id = input("Enter Order ID of the customer : ")
+
+    ind = data.loc[data['Order ID'] == order_id]
+    print(ind)
+
+
+def view_all_customers():
+
+    data = pd.read_csv(r'C:\Users\LENOVO\Desktop\Book1.csv')
+    print(data)
+
+
+choice = 0
+while choice != 5:
+    print("Here Is The Menu : ")
+    print("1. Add Customer")
+    print("2. Delete Customer")
+    print("3. View on Order ID")
+    print("4. View All")
+    print("5. Exit")
+    choice = int(input("Enter Your Choice : "))
+
+    if choice == 1:
+        add_new_customer()
+
+    elif choice == 2:
+        delete_any_customer()
+
+    elif choice == 3:
+        find_any_customer()
+
+    elif choice == 4:
+        view_all_customers()
+
